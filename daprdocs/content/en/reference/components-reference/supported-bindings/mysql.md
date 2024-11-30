@@ -28,6 +28,8 @@ spec:
       value: "<CONNECTION_STRING>"
     - name: pemPath # Optional
       value: "<PEM PATH>"
+    - name: pemContents # Optional, supersedes pemPath
+      value: "<PEM CONTENTS>"
     - name: maxIdleConns
       value: "<MAX_IDLE_CONNECTIONS>"
     - name: maxOpenConns
@@ -45,14 +47,15 @@ Note that you can not use secret just for username/password. If you use secret, 
 
 ## Spec metadata fields
 
-| Field              | Required | Binding support |  Details | Example |
-|--------------------|:--------:|------------|-----|---------|
-| `url` | Y | Output | Represent DB connection in Data Source Name (DNS) format. See [here](#ssl-connection-details) SSL details | `"user:password@tcp(localhost:3306)/dbname"` |
-| `pemPath` | Y | Output | Path to the PEM file. Used with SSL connection | `"path/to/pem/file"` |
-| `maxIdleConns` | N | Output | The max idle connections. Integer greater than 0 | `"10"` |
-| `maxOpenConns` | N | Output | The max open connections. Integer greater than 0 | `"10"` |
-| `connMaxLifetime` | N | Output | The max connection lifetime. Duration string | `"12s"` |
-| `connMaxIdleTime` | N | Output | The max connection idle time. Duration string | `"12s"` |
+| Field              | Required | Binding support | Details                                                                                                  | Example                                                                                                             |
+|--------------------|:--------:|------------|----------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|
+| `url` |    Y     | Output | Represent DB connection in Data Source Name (DNS) format. See [here](#ssl-connection-details) SSL details | `"user:password@tcp(localhost:3306)/dbname"`                                                                        |
+| `pemPath` |    N     | Output | Path to the PEM file. Used with SSL connection                                                           | `"path/to/pem/file"`                                                                                                |
+| `pemContents` |    N     | Output | PEM file contents. Used with SSL connection. Supersedes `pemPath`                                        | `"-----BEGIN CERTIFICATE-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwJw7z4z\n...\n-----END CERTIFICATE-----"` |
+| `maxIdleConns` |    N     | Output | The max idle connections. Integer greater than 0                                                         | `"10"`                                                                                                              |
+| `maxOpenConns` |    N     | Output | The max open connections. Integer greater than 0                                                         | `"10"`                                                                                                              |
+| `connMaxLifetime` |    N     | Output | The max connection lifetime. Duration string                                                             | `"12s"`                                                                                                             |
+| `connMaxIdleTime` |    N     | Output | The max connection idle time. Duration string                                                            | `"12s"`                                                                                                             |
 
 ### SSL connection
 
